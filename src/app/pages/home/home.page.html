@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <img src="/assets/img/logo-club.png" alt="Logo del Club" style="height: 50px;">
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="irALogin()">Iniciar Sesión</ion-button>
+      <ion-button (click)="irARegistro()">Registrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h2>Partidos</h2>
+        <ion-list>
+          <ion-card *ngFor="let partido of partidos">
+            <ion-card-content (click)="verEquipo(partido.equipo1)">
+              <ion-label>
+                {{ partido.equipo1 }} vs {{ partido.equipo2 }} <br>
+                Fecha: {{ partido.fecha | date:'short' }} <br>
+                Hora: {{ partido.hora }}
+              </ion-label>
+            </ion-card-content>
+          </ion-card>
+          <ion-card *ngFor="let partido of partidos">
+            <ion-card-content (click)="verEquipo(partido.equipo2)">
+              <ion-label>
+                {{ partido.equipo1 }} vs {{ partido.equipo2 }} <br>
+                Fecha: {{ partido.fecha | date:'short' }} <br>
+                Hora: {{ partido.hora }}
+              </ion-label>
+            </ion-card-content>
+          </ion-card>
+        </ion-list>
+
+        <h2>Marcador de Goleadores</h2>
+        <ion-list>
+          <ion-card *ngFor="let jugador of goleadores">
+            <ion-card-content (click)="verJugador(jugador.rut)">
+              <ion-label>
+                {{ jugador.nombre }} {{ jugador.apellidoPaterno }} {{ jugador.apellidoMaterno }} <br>
+                Goles: {{ jugador.goles }}
+              </ion-label>
+            </ion-card-content>
+          </ion-card>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+

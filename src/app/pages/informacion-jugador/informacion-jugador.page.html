@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Información del Jugador</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h2>{{ jugador?.nombre }} {{ jugador?.apellidoPaterno }} {{ jugador?.apellidoMaterno }}</h2>
+        <p>RUT: {{ jugador?.rut }}</p>
+        <p>Goles: {{ jugador?.goles }}</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Información del Equipo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h2>Jugadores Titulares</h2>
+        <ion-list>
+          <ion-item *ngFor="let jugador of equipo?.titulares">
+            {{ jugador.nombre }} {{ jugador.apellidoPaterno }} {{ jugador.apellidoMaterno }}
+          </ion-item>
+        </ion-list>
+
+        <h2>Jugadores de Reserva</h2>
+        <ion-list>
+          <ion-item *ngFor="let jugador of equipo?.reservas">
+            {{ jugador.nombre }} {{ jugador.apellidoPaterno }} {{ jugador.apellidoMaterno }}
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

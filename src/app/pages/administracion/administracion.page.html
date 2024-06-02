@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Administración</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h2>Equipos</h2>
+        <ion-list>
+          <ion-item *ngFor="let equipo of equipos">
+            {{ equipo.nombre }}
+            <ion-button slot="end" (click)="editarEquipo(equipo)">Editar</ion-button>
+            <ion-button slot="end" (click)="eliminarEquipo(equipo)">Eliminar</ion-button>
+          </ion-item>
+        </ion-list>
+        <form (ngSubmit)="anadirEquipo()">
+          <ion-item>
+            <ion-label position="floating">Nombre del Equipo</ion-label>
+            <ion-input [(ngModel)]="nuevoEquipoNombre" name="nuevoEquipoNombre" required></ion-input>
+          </ion-item>
+          <ion-button expand="full" type="submit">Añadir Equipo</ion-button>
+        </form>
+
+        <h2>Jugadores</h2>
+        <ion-list>
+          <ion-item *ngFor="let jugador of jugadores">
+            {{ jugador.nombre }} {{ jugador.apellidoPaterno }} {{ jugador.apellidoMaterno }}
+            <ion-button slot="end" (click)="editarJugador(jugador)">Editar</ion-button>
+            <ion-button slot="end" (click)="eliminarJugador(jugador)">Eliminar</ion-button>
+          </ion-item>
+        </ion-list>
+        <form (ngSubmit)="anadirJugador()">
+          <ion-item>
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input [(ngModel)]="nuevoJugador.nombre" name="nombre" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Apellido Paterno</ion-label>
+            <ion-input [(ngModel)]="nuevoJugador.apellidoPaterno" name="apellidoPaterno" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Apellido Materno</ion-label>
+            <ion-input [(ngModel)]="nuevoJugador.apellidoMaterno" name="apellidoMaterno" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">RUT</ion-label>
+            <ion-input [(ngModel)]="nuevoJugador.rut" name="rut" required></ion-input>
+          </ion-item>
+          <ion-button expand="full" type="submit">Añadir Jugador</ion-button>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
