@@ -1,0 +1,7 @@
+{
+  "name": "agenda-futbol",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
