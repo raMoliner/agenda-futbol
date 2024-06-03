@@ -37,7 +37,7 @@
 @import "@ionic/angular/css/palettes/dark.system.css";
 
 ion-app, ion-content {
-  --background: url('/assets/img/fondo.png') no-repeat center center / cover;
+  --background: url('/assets/img/fondo3.webp') no-repeat center center / cover;
 }
 
 ion-card {
@@ -48,4 +48,29 @@ ion-card {
 
 h2 {
   color: black;
+}
+
+:root {
+  --ion-color-primary: #20FFA3;
+  --ion-color-primary-rgb: 32, 255, 163;
+  --ion-color-primary-contrast: #000;
+  --ion-color-primary-contrast-rgb: 0, 0, 0;
+  --ion-color-primary-shade: #1ED789;
+  --ion-color-primary-tint: #24FFAA;
+  
+  --ion-background-color: #f8f9fa;
+  --ion-text-color: #000;
+}
+
+ion-card {
+  background: var(--ion-color-primary);
+  color: var(--ion-color-primary-contrast);
+}
+
+ion-card-header {
+  background: var(--ion-color-primary-shade);
+}
+
+ion-card-title, ion-card-content, ion-label {
+  color: var(--ion-color-primary-contrast);
 }

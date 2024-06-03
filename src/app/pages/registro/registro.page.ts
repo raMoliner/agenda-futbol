@@ -15,11 +15,9 @@ export class RegistroPage implements OnInit {
   rut: string = '';
   password: string = '';
   equipo: string = '';
-  equipos: any[];
+  equipos: any[] = [];
 
-  constructor(private authService: AuthService, private equipoService: EquipoService, private router: Router) {
-    this.equipos = [];
-  }
+  constructor(private authService: AuthService, private equipoService: EquipoService, private router: Router) {}
 
   ngOnInit() {
     this.equipos = this.equipoService.getEquipos();

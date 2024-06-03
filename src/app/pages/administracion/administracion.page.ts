@@ -67,7 +67,7 @@ export class AdministracionPage implements OnInit {
   }
 
   anadirJugador() {
-    this.equipos[0].titulares.push(this.nuevoJugador); // Añadir jugador al primer equipo por simplicidad
+    this.equipos[0].titulares.push(this.nuevoJugador); 
     this.jugadores.push(this.nuevoJugador);
     this.nuevoJugador = { nombre: '', apellidoPaterno: '', apellidoMaterno: '', rut: '' };
     this.equipoService.saveEquipos(this.equipos);

@@ -8,22 +8,16 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage {
-  rut: string ='';
+  rut: string = '';
   password: string ='';
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) {}
 
   onLogin() {
     if (this.authService.login(this.rut, this.password)) {
       this.router.navigate(['/home']);
     } else {
-      alert('RUT o contraseña incorrectos');
+      alert('Error al iniciar sesión');
     }
   }
-
-  goToRegistro() {
-    this.router.navigate(['/registro']);
-  }
-
 }
-

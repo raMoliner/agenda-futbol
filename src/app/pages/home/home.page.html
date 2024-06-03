@@ -4,9 +4,10 @@
       <img src="/assets/img/Logopequeno.png" alt="Logo del Club" style="height: 50px;">
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="irALogin()">Iniciar Sesión</ion-button>
-      <ion-button (click)="irARegistro()">Registrar</ion-button>
+      <ion-button *ngIf="!isLoggedIn()" (click)="irALogin()">Iniciar Sesión</ion-button>
+      <ion-button *ngIf="!isLoggedIn()" (click)="irARegistro()">Registrar</ion-button>
       <ion-button *ngIf="isLoggedIn()" (click)="irAAdministracion()">Administración</ion-button>
+      <ion-button *ngIf="isLoggedIn()" (click)="logout()">Cerrar Sesión</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -30,7 +31,7 @@
               </ion-card-header>
               <ion-card-content>
                 <ion-label>
-                  Fecha: {{ partido.fecha | date:'short' }} <br>
+                  Fecha: {{ partido.fecha }} <br>
                   Hora: {{ partido.hora }}
                 </ion-label>
               </ion-card-content>

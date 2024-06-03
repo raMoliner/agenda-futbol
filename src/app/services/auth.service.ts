@@ -4,22 +4,13 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
-  private users: any[] = [];
   private currentUser: any;
+  private users: any[] = [];
 
-  constructor() {
-    this.loadUsers();
-  }
+  constructor() {}
 
-  loadUsers() {
-    const users = localStorage.getItem('users');
-    if (users) {
-      this.users = JSON.parse(users);
-    }
-  }
-
-  saveUsers() {
-    localStorage.setItem('users', JSON.stringify(this.users));
+  isLoggedIn(): boolean {
+    return !!this.currentUser;
   }
 
   login(rut: string, password: string): boolean {
@@ -33,14 +24,13 @@ export class AuthService {
 
   register(user: any): boolean {
     if (this.users.find(u => u.rut === user.rut)) {
-      return false; // Usuario ya existe
+      return false; 
     }
     this.users.push(user);
-    this.saveUsers();
     return true;
   }
 
-  isLoggedIn(): boolean {
-    return !!this.currentUser;
+  logout() {
+    this.currentUser = null;
   }
 }

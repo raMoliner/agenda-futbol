@@ -51,7 +51,12 @@ export class HomePage implements OnInit {
     this.router.navigate(['/administracion']);
   }
 
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
+
   isLoggedIn(): boolean {
-    return this.authService.isLoggedIn(); // Suponiendo que AuthService tiene un método isLoggedIn
+    return this.authService.isLoggedIn();
   }
 }
