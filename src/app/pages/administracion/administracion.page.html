@@ -23,6 +23,13 @@
           </ion-item>
           <ion-button expand="full" type="submit">Añadir Equipo</ion-button>
         </form>
+        <form *ngIf="equipoSeleccionado" (ngSubmit)="guardarEdicionEquipo()">
+          <ion-item>
+            <ion-label position="floating">Nombre del Equipo</ion-label>
+            <ion-input [(ngModel)]="equipoSeleccionado.nombre" name="equipoSeleccionadoNombre" required></ion-input>
+          </ion-item>
+          <ion-button expand="full" type="submit">Guardar Cambios</ion-button>
+        </form>
 
         <h2>Jugadores</h2>
         <ion-list>
@@ -50,6 +57,25 @@
             <ion-input [(ngModel)]="nuevoJugador.rut" name="rut" required></ion-input>
           </ion-item>
           <ion-button expand="full" type="submit">Añadir Jugador</ion-button>
+        </form>
+        <form *ngIf="jugadorSeleccionado" (ngSubmit)="guardarEdicionJugador()">
+          <ion-item>
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input [(ngModel)]="jugadorSeleccionado.nombre" name="jugadorSeleccionadoNombre" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Apellido Paterno</ion-label>
+            <ion-input [(ngModel)]="jugadorSeleccionado.apellidoPaterno" name="jugadorSeleccionadoApellidoPaterno" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Apellido Materno</ion-label>
+            <ion-input [(ngModel)]="jugadorSeleccionado.apellidoMaterno" name="jugadorSeleccionadoApellidoMaterno" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">RUT</ion-label>
+            <ion-input [(ngModel)]="jugadorSeleccionado.rut" name="jugadorSeleccionadoRut" required></ion-input>
+          </ion-item>
+          <ion-button expand="full" type="submit">Guardar Cambios</ion-button>
         </form>
       </ion-col>
     </ion-row>

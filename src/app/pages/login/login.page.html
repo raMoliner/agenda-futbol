@@ -7,6 +7,11 @@
 <ion-content>
   <ion-grid>
     <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <img src="assets/img/Logo.png" alt="Escudo del Equipo" class="escudo">
+      </ion-col>
+    </ion-row>
+    <ion-row>
       <ion-col>
         <form (ngSubmit)="onLogin()">
           <ion-item>
@@ -19,7 +24,6 @@
           </ion-item>
           <ion-button expand="full" type="submit">Iniciar Sesión</ion-button>
         </form>
-        <ion-button expand="full" fill="outline" (click)="goToRegistro()">Registrarse</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

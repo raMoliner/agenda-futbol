@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
   private users: any[] = [];
+  private currentUser: any;
 
   constructor() {
     this.loadUsers();
@@ -23,7 +24,11 @@ export class AuthService {
 
   login(rut: string, password: string): boolean {
     const user = this.users.find(u => u.rut === rut && u.password === password);
-    return !!user;
+    if (user) {
+      this.currentUser = user;
+      return true;
+    }
+    return false;
   }
 
   register(user: any): boolean {
@@ -33,5 +38,9 @@ export class AuthService {
     this.users.push(user);
     this.saveUsers();
     return true;
+  }
+
+  isLoggedIn(): boolean {
+    return !!this.currentUser;
   }
 }

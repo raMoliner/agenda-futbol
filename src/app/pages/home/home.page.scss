@@ -1,0 +1,37 @@
+.clickable-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  
+  .clickable-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  ion-card {
+    background: white;
+    color: black;
+    margin: 10px 0;
+    border-radius: 8px;
+  }
+  
+  ion-card-header {
+    background: #f8f9fa;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  ion-card-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  ion-card-content {
+    padding: 10px 15px;
+  }
+  
+  ion-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+  }

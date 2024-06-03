@@ -6,11 +6,17 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row>
-      <ion-col>
-        <h2>{{ jugador?.nombre }} {{ jugador?.apellidoPaterno }} {{ jugador?.apellidoMaterno }}</h2>
-        <p>RUT: {{ jugador?.rut }}</p>
-        <p>Goles: {{ jugador?.goles }}</p>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size-md="6" size-lg="4">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{ jugador?.nombre }} {{ jugador?.apellidoPaterno }} {{ jugador?.apellidoMaterno }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>RUT: {{ jugador?.rut }}</p>
+            <p>Goles: {{ jugador?.goles }}</p>
+          </ion-card-content>
+        </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>

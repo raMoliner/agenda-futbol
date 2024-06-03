@@ -17,8 +17,10 @@ export class AdministracionPage implements OnInit {
     apellidoMaterno: '',
     rut: ''
   };
+  equipoSeleccionado: Equipo | null = null;
+  jugadorSeleccionado: Jugador | null = null;
 
-  constructor(private equipoService: EquipoService) { }
+  constructor(private equipoService: EquipoService) {}
 
   ngOnInit() {
     this.equipos = this.equipoService.getEquipos();
@@ -45,7 +47,18 @@ export class AdministracionPage implements OnInit {
   }
 
   editarEquipo(equipo: Equipo) {
-    // Lógica para editar equipo
+    this.equipoSeleccionado = { ...equipo };
+  }
+
+  guardarEdicionEquipo() {
+    if (this.equipoSeleccionado) {
+      const index = this.equipos.findIndex(e => e.nombre === this.equipoSeleccionado!.nombre);
+      if (index !== -1) {
+        this.equipos[index] = this.equipoSeleccionado;
+        this.equipoService.saveEquipos(this.equipos);
+        this.equipoSeleccionado = null;
+      }
+    }
   }
 
   eliminarEquipo(equipo: Equipo) {
@@ -54,15 +67,31 @@ export class AdministracionPage implements OnInit {
   }
 
   anadirJugador() {
-    // Añadir jugador al primer equipo por simplicidad
-    this.equipos[0].titulares.push(this.nuevoJugador);
+    this.equipos[0].titulares.push(this.nuevoJugador); // Añadir jugador al primer equipo por simplicidad
     this.jugadores.push(this.nuevoJugador);
     this.nuevoJugador = { nombre: '', apellidoPaterno: '', apellidoMaterno: '', rut: '' };
     this.equipoService.saveEquipos(this.equipos);
   }
 
   editarJugador(jugador: Jugador) {
-    // Lógica para editar jugador
+    this.jugadorSeleccionado = { ...jugador };
+  }
+
+  guardarEdicionJugador() {
+    if (this.jugadorSeleccionado) {
+      this.equipos.forEach(equipo => {
+        const indexTitulares = equipo.titulares.findIndex(j => j.rut === this.jugadorSeleccionado!.rut);
+        if (indexTitulares !== -1) {
+          equipo.titulares[indexTitulares] = this.jugadorSeleccionado!;
+        }
+        const indexReservas = equipo.reservas.findIndex(j => j.rut === this.jugadorSeleccionado!.rut);
+        if (indexReservas !== -1) {
+          equipo.reservas[indexReservas] = this.jugadorSeleccionado!;
+        }
+      });
+      this.equipoService.saveEquipos(this.equipos);
+      this.jugadorSeleccionado = null;
+    }
   }
 
   eliminarJugador(jugador: Jugador) {

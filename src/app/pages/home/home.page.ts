@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { PartidoService } from 'src/app/services/partido.service';
+import { GoleadorService } from 'src/app/services/goleador.service';
 import { Partido } from 'src/app/models/partido.model';
 import { Goleador } from 'src/app/models/goleador.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -10,14 +13,22 @@ import { Goleador } from 'src/app/models/goleador.model';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-  partidos: Partido[] = [];
-  goleadores: Goleador[] = [];
+  partidos$: Observable<Partido[]>;
+  goleadores$: Observable<Goleador[]>;
 
-  constructor(private partidoService: PartidoService, private router: Router) { }
+  constructor(
+    private partidoService: PartidoService,
+    private goleadorService: GoleadorService,
+    private authService: AuthService,
+    private router: Router
+  ) {
+    this.partidos$ = new Observable<Partido[]>(); // Inicialización en el constructor
+    this.goleadores$ = new Observable<Goleador[]>(); // Inicialización en el constructor
+  }
 
   ngOnInit() {
-    this.partidos = this.partidoService.getPartidos();
-    this.goleadores = this.partidoService.getGoleadores();
+    this.partidos$ = this.partidoService.getPartidos();
+    this.goleadores$ = this.goleadorService.getGoleadores();
   }
 
   verEquipo(nombre: string) {
@@ -34,5 +45,13 @@ export class HomePage implements OnInit {
 
   irARegistro() {
     this.router.navigate(['/registro']);
+  }
+
+  irAAdministracion() {
+    this.router.navigate(['/administracion']);
+  }
+
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn(); // Suponiendo que AuthService tiene un método isLoggedIn
   }
 }

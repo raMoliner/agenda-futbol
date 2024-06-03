@@ -6,21 +6,27 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row>
-      <ion-col>
-        <h2>Jugadores Titulares</h2>
-        <ion-list>
-          <ion-item *ngFor="let jugador of equipo?.titulares">
-            {{ jugador.nombre }} {{ jugador.apellidoPaterno }} {{ jugador.apellidoMaterno }}
-          </ion-item>
-        </ion-list>
-
-        <h2>Jugadores de Reserva</h2>
-        <ion-list>
-          <ion-item *ngFor="let jugador of equipo?.reservas">
-            {{ jugador.nombre }} {{ jugador.apellidoPaterno }} {{ jugador.apellidoMaterno }}
-          </ion-item>
-        </ion-list>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size-md="6" size-lg="4">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{ equipo?.nombre }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <h2>Jugadores Titulares</h2>
+            <ion-list>
+              <ion-item *ngFor="let jugador of equipo?.titulares">
+                {{ jugador.nombre }} {{ jugador.apellidoPaterno }} {{ jugador.apellidoMaterno }}
+              </ion-item>
+            </ion-list>
+            <h2>Jugadores de Reserva</h2>
+            <ion-list>
+              <ion-item *ngFor="let jugador of equipo?.reservas">
+                {{ jugador.nombre }} {{ jugador.apellidoPaterno }} {{ jugador.apellidoMaterno }}
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>

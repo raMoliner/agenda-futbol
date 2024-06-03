@@ -36,7 +36,16 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
 
-body {
-    background: url('/assets/img/Fondo.webp') no-repeat center center fixed;
-    background-size: cover;
-  }
+ion-app, ion-content {
+  --background: url('/assets/img/fondo.png') no-repeat center center / cover;
+}
+
+ion-card {
+  background: rgb(196, 253, 234);
+  color: black;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añade un poco de sombra para el relieve */
+}
+
+h2 {
+  color: black;
+}

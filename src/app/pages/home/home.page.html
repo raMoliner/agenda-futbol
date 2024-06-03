@@ -1,11 +1,12 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      <img src="/assets/img/logo-club.png" alt="Logo del Club" style="height: 50px;">
+      <img src="/assets/img/Logopequeno.png" alt="Logo del Club" style="height: 50px;">
     </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="irALogin()">Iniciar Sesión</ion-button>
       <ion-button (click)="irARegistro()">Registrar</ion-button>
+      <ion-button *ngIf="isLoggedIn()" (click)="irAAdministracion()">Administración</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -13,42 +14,46 @@
 <ion-content>
   <ion-grid>
     <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <img src="assets/img/Logo.png" alt="Escudo del Equipo" class="escudo">
+      </ion-col>
+    </ion-row>
+    <ion-row>
       <ion-col>
+        <h2>Liga Amateur 2024</h2>
         <h2>Partidos</h2>
         <ion-list>
-          <ion-card *ngFor="let partido of partidos">
-            <ion-card-content (click)="verEquipo(partido.equipo1)">
-              <ion-label>
-                {{ partido.equipo1 }} vs {{ partido.equipo2 }} <br>
-                Fecha: {{ partido.fecha | date:'short' }} <br>
-                Hora: {{ partido.hora }}
-              </ion-label>
-            </ion-card-content>
-          </ion-card>
-          <ion-card *ngFor="let partido of partidos">
-            <ion-card-content (click)="verEquipo(partido.equipo2)">
-              <ion-label>
-                {{ partido.equipo1 }} vs {{ partido.equipo2 }} <br>
-                Fecha: {{ partido.fecha | date:'short' }} <br>
-                Hora: {{ partido.hora }}
-              </ion-label>
-            </ion-card-content>
-          </ion-card>
+          <ng-container *ngIf="partidos$ | async as partidos">
+            <ion-card *ngFor="let partido of partidos" (click)="verEquipo(partido.equipo1)" class="clickable-card">
+              <ion-card-header>
+                <ion-card-title>{{ partido.equipo1 }} vs {{ partido.equipo2 }}</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <ion-label>
+                  Fecha: {{ partido.fecha | date:'short' }} <br>
+                  Hora: {{ partido.hora }}
+                </ion-label>
+              </ion-card-content>
+            </ion-card>
+          </ng-container>
         </ion-list>
 
         <h2>Marcador de Goleadores</h2>
         <ion-list>
-          <ion-card *ngFor="let jugador of goleadores">
-            <ion-card-content (click)="verJugador(jugador.rut)">
-              <ion-label>
-                {{ jugador.nombre }} {{ jugador.apellidoPaterno }} {{ jugador.apellidoMaterno }} <br>
-                Goles: {{ jugador.goles }}
-              </ion-label>
-            </ion-card-content>
-          </ion-card>
+          <ng-container *ngIf="goleadores$ | async as goleadores">
+            <ion-card *ngFor="let jugador of goleadores" (click)="verJugador(jugador.rut)" class="clickable-card">
+              <ion-card-header>
+                <ion-card-title>{{ jugador.nombre }} {{ jugador.apellidoPaterno }} {{ jugador.apellidoMaterno }}</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <ion-label>
+                  Goles: {{ jugador.goles }}
+                </ion-label>
+              </ion-card-content>
+            </ion-card>
+          </ng-container>
         </ion-list>
       </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
-

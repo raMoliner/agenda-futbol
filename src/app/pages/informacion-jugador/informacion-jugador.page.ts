@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Goleador } from 'src/app/models/goleador.model';
-import { PartidoService } from 'src/app/services/partido.service';
+import { GoleadorService } from 'src/app/services/goleador.service';
 
 @Component({
   selector: 'app-informacion-jugador',
@@ -13,11 +13,13 @@ export class InformacionJugadorPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private partidoService: PartidoService
+    private goleadorService: GoleadorService
   ) { }
 
   ngOnInit() {
     const rut = this.route.snapshot.paramMap.get('rut');
-    this.jugador = this.partidoService.getGoleadores().find(j => j.rut === rut);
+    this.goleadorService.getGoleadores().subscribe(goleadores => {
+      this.jugador = goleadores.find(j => j.rut === rut);
+    });
   }
 }

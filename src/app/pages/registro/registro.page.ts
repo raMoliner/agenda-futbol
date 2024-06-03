@@ -9,15 +9,17 @@ import { EquipoService } from 'src/app/services/equipo.service';
   styleUrls: ['./registro.page.scss'],
 })
 export class RegistroPage implements OnInit {
-  nombre: string ='';
+  nombre: string = '';
   apellidoPaterno: string = '';
   apellidoMaterno: string = '';
   rut: string = '';
   password: string = '';
   equipo: string = '';
-  equipos: any[] = [] ;
+  equipos: any[];
 
-  constructor(private authService: AuthService, private equipoService: EquipoService, private router: Router) { }
+  constructor(private authService: AuthService, private equipoService: EquipoService, private router: Router) {
+    this.equipos = [];
+  }
 
   ngOnInit() {
     this.equipos = this.equipoService.getEquipos();
