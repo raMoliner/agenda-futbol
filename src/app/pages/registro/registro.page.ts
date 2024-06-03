@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { EquipoService } from 'src/app/services/equipo.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-registro',
@@ -17,13 +18,18 @@ export class RegistroPage implements OnInit {
   equipo: string = '';
   equipos: any[] = [];
 
-  constructor(private authService: AuthService, private equipoService: EquipoService, private router: Router) {}
+  constructor(
+    private authService: AuthService, 
+    private equipoService: EquipoService, 
+    private router: Router,
+    private alertController: AlertController
+  ) {}
 
   ngOnInit() {
     this.equipos = this.equipoService.getEquipos();
   }
 
-  onRegister() {
+  async onRegister() {
     const user = {
       nombre: this.nombre,
       apellidoPaterno: this.apellidoPaterno,
@@ -34,9 +40,20 @@ export class RegistroPage implements OnInit {
     };
 
     if (this.authService.register(user)) {
+      const alert = await this.alertController.create({
+        header: 'Registro Exitoso',
+        message: 'Usuario registrado correctamente.',
+        buttons: ['OK']
+      });
+      await alert.present();
       this.router.navigate(['/login']);
     } else {
-      alert('Error al registrar el usuario');
+      const alert = await this.alertController.create({
+        header: 'Error',
+        message: 'Error al registrar el usuario. RUT ya registrado.',
+        buttons: ['OK']
+      });
+      await alert.present();
     }
   }
 }

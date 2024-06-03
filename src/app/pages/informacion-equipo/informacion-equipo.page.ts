@@ -13,6 +13,6 @@ export class InformacionEquipoPage implements OnInit {
   constructor(private equipoService: EquipoService) { }
 
   ngOnInit() {
-    this.equipo = this.equipoService.getEquipo('Equipo 1'); // Puedes cambiar esto para seleccionar diferentes equipos
+    this.equipo = this.equipoService.getEquipo('Equipo 1'); 
   }
 }

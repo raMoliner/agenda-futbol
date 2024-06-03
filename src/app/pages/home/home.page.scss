@@ -1,3 +1,5 @@
+/* Animaciones para los card */
+
 .clickable-card {
   transition: transform 0.2s, box-shadow 0.2s;
   cursor: pointer;
@@ -8,33 +10,33 @@
   transform: scale(1.05);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
+/* Personalización de los card para la información de los partidos */
 
 ion-card {
-  background: #20FFA3; /* Verde principal */
-  color: #000; /* Texto en negro para contraste */
-  margin: 10px 0;
+  background: #20FFA3; 
+  color: #000; 
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 ion-card-header {
-  background: #1ED789; /* Un tono más oscuro del verde principal */
+  background: #1ED789; 
   border-bottom: 1px solid #e0e0e0;
 }
 
 ion-card-title {
   font-size: 1.2em;
   font-weight: bold;
-  color: #000; /* Negro para buen contraste */
+  color: #000; 
 }
 
 ion-card-content {
   padding: 10px 15px;
-  color: #000; /* Negro para buen contraste */
+  color: #000; 
 }
 
 ion-label {
   display: block;
   margin-bottom: 5px;
-  color: #000; /* Negro para buen contraste */
+  color: #000; 
 }
