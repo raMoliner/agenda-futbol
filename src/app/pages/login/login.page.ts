@@ -1,33 +1,47 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage {
-  rut: string = '';
-  password: string = '';
+export class LoginPage implements OnInit {
+  loginForm: FormGroup;
 
   constructor(
-    private authService: AuthService, 
-    private router: Router,
-    private alertController: AlertController
-  ) {}
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
+    this.loginForm = this.formBuilder.group({
+      rut: ['', Validators.required],
+      password: ['', Validators.required],
+    });
+  }
 
-  async onLogin() {
-    if (this.authService.login(this.rut, this.password)) {
-      this.router.navigate(['/home']);
+  ngOnInit() {}
+
+  onSubmit() {
+    if (this.loginForm.valid) {
+      this.authService
+        .login(this.loginForm.value.rut, this.loginForm.value.password)
+        .subscribe(
+          (success) => {
+            if (success) {
+              this.router.navigate(['/home']);
+            } else {
+              alert('Error en el inicio de sesión');
+            }
+          },
+          (error) => {
+            alert('Error en el inicio de sesión: ' + error.message);
+          }
+        );
     } else {
-      const alert = await this.alertController.create({
-        header: 'Error',
-        message: 'Credenciales incorrectas.',
-        buttons: ['OK']
-      });
-      await alert.present();
+      alert('Por favor, complete el formulario correctamente.');
     }
   }
 

@@ -74,3 +74,10 @@ ion-card-header {
 ion-card-title, ion-card-content, ion-label {
   color: var(--ion-color-primary-contrast);
 }
+
+ion-note[color="danger"] {
+  background-color: #000; // Fondo negro
+  color: #fff; // Texto blanco
+  padding: 5px;
+  border-radius: 5px;
+}

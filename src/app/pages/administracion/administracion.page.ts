@@ -20,8 +20,7 @@ export class AdministracionPage implements OnInit {
   equipoSeleccionado: Equipo | null = null;
   jugadorSeleccionado: Jugador | null = null;
   
-/* Esquema para el manejo de datos pero como no estoy conectado 
-a una base de datos solo estoy trabajando con datos en el front end para mostrar */ 
+
 
   constructor(private equipoService: EquipoService) {}
 

@@ -4,8 +4,6 @@
       <img src="/assets/img/Logopequeno.png" alt="Logo del Club" style="height: 50px;">
     </ion-title>
     <ion-buttons slot="end">
-      <!--<ion-button *ngIf="!isLoggedIn()" (click)="irALogin()">Iniciar Sesión</ion-button>-->
-      <!--<ion-button *ngIf="!isLoggedIn()" (click)="irARegistro()">Registrar</ion-button>-->
       <ion-button *ngIf="isLoggedIn()" (click)="irAAdministracion()">Admin</ion-button>
       <ion-button *ngIf="isLoggedIn()" (click)="logout()">Cerrar Sesión</ion-button>
     </ion-buttons>
@@ -25,7 +23,7 @@
         <h2>Partidos</h2>
         <ion-list>
           <ng-container *ngIf="partidos$ | async as partidos">
-            <ion-card *ngFor="let partido of partidos" (click)="verEquipo(partido.equipo1)" class="clickable-card">
+            <ion-card *ngFor="let partido of partidos" class="clickable-card" (click)="verEquipo(partido.equipo1)">
               <ion-card-header>
                 <ion-card-title>{{ partido.equipo1 }} vs {{ partido.equipo2 }}</ion-card-title>
               </ion-card-header>
@@ -42,7 +40,7 @@
         <h2>Marcador de Goleadores</h2>
         <ion-list>
           <ng-container *ngIf="goleadores$ | async as goleadores">
-            <ion-card *ngFor="let jugador of goleadores" (click)="verJugador(jugador.rut)" class="clickable-card">
+            <ion-card *ngFor="let jugador of goleadores" class="clickable-card" (click)="verJugador(jugador.rut)">
               <ion-card-header>
                 <ion-card-title>{{ jugador.nombre }} {{ jugador.apellidoPaterno }} {{ jugador.apellidoMaterno }}</ion-card-title>
               </ion-card-header>

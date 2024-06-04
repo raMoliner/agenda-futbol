@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { EquipoService } from 'src/app/services/equipo.service';
-import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-registro',
@@ -10,50 +9,40 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./registro.page.scss'],
 })
 export class RegistroPage implements OnInit {
-  nombre: string = '';
-  apellidoPaterno: string = '';
-  apellidoMaterno: string = '';
-  rut: string = '';
-  password: string = '';
-  equipo: string = '';
-  equipos: any[] = [];
+  registroForm: FormGroup;
 
   constructor(
-    private authService: AuthService, 
-    private equipoService: EquipoService, 
-    private router: Router,
-    private alertController: AlertController
-  ) {}
-
-  ngOnInit() {
-    this.equipos = this.equipoService.getEquipos();
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
+    this.registroForm = this.formBuilder.group({
+      nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      apellidoPaterno: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      apellidoMaterno: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      rut: ['', [Validators.required, Validators.pattern(/^\d{1,8}-[\dkK]$/)]],
+      password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20), Validators.pattern(/^(?=.*[A-Z])(?=.*\d).*$/)]],
+    });
   }
 
-  async onRegister() {
-    const user = {
-      nombre: this.nombre,
-      apellidoPaterno: this.apellidoPaterno,
-      apellidoMaterno: this.apellidoMaterno,
-      rut: this.rut,
-      password: this.password,
-      equipo: this.equipo
-    };
+  ngOnInit() {}
 
-    if (this.authService.register(user)) {
-      const alert = await this.alertController.create({
-        header: 'Registro Exitoso',
-        message: 'Usuario registrado correctamente.',
-        buttons: ['OK']
-      });
-      await alert.present();
-      this.router.navigate(['/login']);
+  onSubmit() {
+    if (this.registroForm.valid) {
+      this.authService.register(this.registroForm.value).subscribe(
+        (success) => {
+          if (success) {
+            this.router.navigate(['/login']);
+          } else {
+            alert('Error en el registro');
+          }
+        },
+        (error) => {
+          alert('Error en el registro: ' + error.message);
+        }
+      );
     } else {
-      const alert = await this.alertController.create({
-        header: 'Error',
-        message: 'Error al registrar el usuario. RUT ya registrado.',
-        buttons: ['OK']
-      });
-      await alert.present();
+      alert('Por favor, complete el formulario correctamente.');
     }
   }
 }
